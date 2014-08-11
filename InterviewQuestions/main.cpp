@@ -4,9 +4,9 @@ int main(int argc, char* argv[])
 {
     //TreeTests();
     //RecursionTests();
-    TestPuzzlers();
+    // TestPuzzlers();
     // InsertionSortTestCases();
 	// StringsTestCases();
-	//ListTestCases();
+	ListTestCases();
 	return 0;
 }

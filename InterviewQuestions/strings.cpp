@@ -62,6 +62,7 @@ void StringsTestCases()
 }
 
 // Given a string of characters, find the longest string subsequence of a given character.
+// Google tech screen, July 31, 2014
 int MaxContiguous(char* psz)
 {
     // Handle NULL

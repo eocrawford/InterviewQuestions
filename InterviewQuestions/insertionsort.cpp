@@ -70,19 +70,18 @@ void InsertionSort(int* prg, int cElements)
 
     for (int i = 1; i < cElements; i++)
     {
-        int j;
+        int j = i;
 
         // Calculate insertion point
 
-        // j = i;
-        // // Linear O(n)
-        //while (j > 0 && prg[j - 1] > prg[i])
-        //{
-        //    j--;
-        //}
+        while (j > 0 && prg[j - 1] > prg[i])
+        {
+            // // Linear O(n)
+            //    j--;
 
-        // Binary search O(log n)
-        j = BinarySearchForInsertionSort(prg[i], prg, 0, i - 1);
+            // Binary search O(log n)
+            j = BinarySearchForInsertionSort(prg[i], prg, 0, i - 1);
+        }
 
         if (i != j)
         {

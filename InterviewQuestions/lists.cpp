@@ -2,21 +2,30 @@
 
 void ListTestCases()
 {
-	// Test circularly linked lists
-	Node* pHead = new Node();
-	pHead->pNext = new Node();
-	pHead->pNext->pNext = new Node();
-	pHead->pNext->pNext->pNext = new Node();
-	pHead->pNext->pNext->pNext->pNext = new Node();
-	pHead->pNext->pNext->pNext->pNext->pNext = new Node();
-	pHead->pNext->pNext->pNext->pNext->pNext->pNext = pHead;
+	Node* pHead = new Node(1);
+	pHead->pNext = new Node(2);
+	pHead->pNext->pNext = new Node(3);
+	pHead->pNext->pNext->pNext = new Node(4);
+	pHead->pNext->pNext->pNext->pNext = new Node(5);
+	pHead->pNext->pNext->pNext->pNext->pNext = new Node(6);
+
+    // NthFromEnd test cases
+    Node* nth;
+    nth = NthFromEnd(pHead, 0);
+    nth = NthFromEnd(NULL, 0);
+    nth = NthFromEnd(pHead, 5);
+    nth = NthFromEnd(pHead, 6);
+    nth = NthFromEnd(pHead, 7);
+
+    // Test circularly linked lists
+    pHead->pNext->pNext->pNext->pNext->pNext->pNext = pHead;
 
 	if (!HasCycle(pHead))
 	{
 		throw;
 	}
 
-	// Un-circular the list to enable deleting it
+	// Break the cycle to enable list deletion
 	pHead->pNext->pNext->pNext->pNext->pNext->pNext = NULL;
 	DeleteList(pHead);
 }
@@ -60,4 +69,36 @@ void DeleteList(Node* pHead)
 		pCur = pCur->pNext;
 		delete pDel;
 	}
+}
+
+// Write a function that returns the Nth node from the end of a linked list.
+// E.g.: 1->2->3->4->NULL, 2, returns node 2.
+Node* NthFromEnd(Node* pHead, unsigned int offset)
+{
+    if (!pHead)
+        return NULL;
+
+    Node* pOne = pHead;
+    Node* pTwo = pHead;
+
+    // Open a gap
+    while (pTwo && offset > 0)
+    {
+        pTwo = pTwo->pNext;
+        offset--;
+    }
+
+    // The provided offset is larger than the list length
+    if (offset)
+        return NULL;
+
+    // Advance both pointers until pTwo goes to null
+    // Check pOne->pNext for the 0 offset case (return last node)
+    while (pOne->pNext && pTwo)
+    {
+        pOne = pOne->pNext;
+        pTwo = pTwo->pNext;
+    }
+
+    return pOne;
 }
